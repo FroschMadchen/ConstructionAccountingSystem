@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/concrete"
+        android:title="Concrete"
+        android:icon="@drawable/ic_concrete_group"/>
+
+    <item android:id="@+id/metal"
+        android:title="Metal"
+        android:icon="@drawable/ic_metal_group"/>
+
+    <item android:id="@+id/statistics"
+        android:title="Statistics"
+        android:icon="@drawable/ic_star_24"/>
+
+</menu>
