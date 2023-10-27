@@ -13,6 +13,7 @@ import com.example.constructionaccountingsystem.model.accounts.room.entities.Acc
 import com.example.constructionaccountingsystem.model.accounts.room.entities.AccountUpdateUsernameTuple
 import com.example.constructionaccountingsystem.model.room.wrapSQLiteException
 import com.example.constructionaccountingsystem.model.settings.AppSettings
+import com.example.constructionaccountingsystem.utils.AsyncLoader
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -24,7 +25,7 @@ class RoomAccountsRepository(
     private val ioDispatcher: CoroutineDispatcher
 ) : AccountsRepository {
 
-    private val currentAccountIdFlow = AsyncLoader {
+    private val currentAccountIdFlow = AsyncLoader { //Асинхронный загрузчик
         MutableStateFlow(AccountId(appSettings.getCurrentAccountId()))
     }
 

@@ -1,4 +1,6 @@
 package com.example.constructionaccountingsystem.model.room
 
-class AppDatabase {
+import androidx.room.RoomDatabase
+
+abstract class AppDatabase : RoomDatabase() {
 }
