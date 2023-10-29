@@ -1,52 +1,23 @@
 package com.example.constructionaccountingsystem.model.accounts
 
 import com.example.constructionaccountingsystem.model.accounts.entities.Account
-import com.example.constructionaccountingsystem.model.accounts.entities.SignUpData
+import com.example.constructionaccountingsystem.model.accounts.room.AccountsDataBase
+import com.example.constructionaccountingsystem.model.accounts.room.entities.AccountDbEntity
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Repository with account-related actions, e.g. sign-in, sign-up, edit account etc.
  */
-interface AccountsRepository {
+class AccountsRepository(
+    private val db:AccountsDataBase,
+) {
+    private val dao get() = db.accountsDao
 
-    /**
-     * Whether user is signed-in or not.
-     */
-    suspend fun isSignedIn(): Boolean
+    fun getAll():Flow<List<AccountDbEntity?>> = dao.getAll()
+    fun getById(id:Long): AccountDbEntity = dao.getById(accountId =id )
 
-    /**
-     * Try to sign-in with the email and password.
-     * @throws [EmptyFieldException]
-     * @throws [AuthException]
-     * @throws [StorageException]
-     */
-    suspend fun signIn(email: String, password: String)
+//    suspend fun delete(account:AccountDbEntity) = dao.delete(account)
 
-    /**
-     * Create a new account.
-     * @throws [EmptyFieldException]
-     * @throws [PasswordMismatchException]
-     * @throws [AccountAlreadyExistsException]
-     * @throws [StorageException]
-     */
-    suspend fun signUp(signUpData: SignUpData)
-
-    /**
-     * Sign-out from the app.
-     */
-    suspend fun logout()
-
-    /**
-     * Get the account info of the current signed-in user.
-     */
-    suspend fun getAccount(): Flow<Account?>
-
-    /**
-     * Change the username of the current signed-in user.
-     * @throws [EmptyFieldException]
-     * @throws [AuthException]
-     * @throws [StorageException]
-     */
-    suspend fun updateAccountUsername(newUsername: String)
+//    suspend fun createAccount(account: AccountDbEntity) = dao.createAccount(account)
 
 }
